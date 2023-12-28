@@ -1,7 +1,4 @@
-﻿using System;
-
-
-namespace SudokuModel
+﻿namespace SudokuModel
 {
     public abstract class SudokuCheck
     {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SudokuModel
+﻿namespace SudokuModel
 {
     public class SudokuField
     {

@@ -1,8 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-
-namespace SudokuModel.UnitTests 
+﻿namespace SudokuModel.UnitTests 
 {
     [TestClass]
     public class SudokuCheckTest

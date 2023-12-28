@@ -4,28 +4,32 @@ namespace SudokuModel
 {
     public class SudokuBoard
     {
-        private int[][] _board;
+        private SudokuField[,] _board;
         public const int BoardSize = 9;
         private ISudokuSolver _solver;
 
-        public SudokuBoard()
+        public SudokuBoard(ISudokuSolver solver)
         {
-            _board = new int[BoardSize][];
+            _board = new SudokuField[BoardSize, BoardSize];
             for (int i = 0; i < BoardSize; i++)
             {
-                _board[i] = new int[BoardSize];
+                for (int j = 0; j < BoardSize; j++)
+                {
+                    this._board[i, j] = new SudokuField();
+                }
             }
-            this._solver ??= new BacktrackingSudokuSolver();
+
+            this._solver = solver ?? throw new ArgumentNullException(nameof(solver));
         }
 
         public int GetCell(int row, int col)
         {
-            return _board[row][col];
+            return _board[row, col].GetFieldValue();
         }
 
         public void SetCell(int row, int col, int value)
         {
-            _board[row][col] = value;
+            _board[row, col].SetFieldValue(value);
         }
 
         public void SolveGame()
@@ -33,52 +37,51 @@ namespace SudokuModel
             _solver.Solve(this);
         }
 
-        private bool IsNumberInRow(SudokuBoard board, int row, int number)
+        public SudokuRow GetRow(int y)
         {
-            for (int column = 0; column < BoardSize; column++)
+            SudokuField[] row = new SudokuField[BoardSize];
+            for (int i = 0; i < BoardSize; i++)
             {
-                if (board.GetCell(row, column) == number)
-                {
-                    return true;
-                }
+                row[i] = _board[y, i];
             }
-            return false;
+            return new SudokuRow(row);
         }
 
-        private bool IsNumberInColumn(SudokuBoard board, int column, int number)
+        public SudokuColumn GetColumn(int x)
         {
-            for (int row = 0; row < BoardSize; row++)
+            SudokuField[] column = new SudokuField[BoardSize];
+            for (int i = 0; i < BoardSize; i++)
             {
-                if (board.GetCell(row, column) == number)
-                {
-                    return true;
-                }
+                column[i] = _board[i, x];
             }
-            return false;
+            return new SudokuColumn(column);
         }
 
-        private bool IsNumberInBox(SudokuBoard board, int row, int column, int number)
+        public SudokuBox GetBox(int x, int y)
         {
-            int rowBoxStart = row - row % 3;
-            int columnBoxStart = column - column % 3;
-            for (int i = rowBoxStart; i < rowBoxStart + 3; i++)
+            SudokuField[] box = new SudokuField[BoardSize];
+            int rowBoxStart = y - y % 3;
+            int columnBoxStart = x - x % 3;
+            int index = 0;
+
+            for (int i = 0; i < 3; i++)
             {
-                for (int j = columnBoxStart; j < columnBoxStart + 3; j++)
+                for (int j = 0; j < 3; j++)
                 {
-                    if (board.GetCell(i, j) == number)
-                    {
-                        return true;
-                    }
+                    box[index] = _board[i + columnBoxStart, j + rowBoxStart];
+                    index++;
                 }
             }
-            return false;
+
+            return new SudokuBox(box);
         }
+
 
         public bool IsValidMove(SudokuBoard board, int row, int column, int number)
         {
-            return !board.IsNumberInRow(board, row, number)
-                   && !board.IsNumberInColumn(board, column, number)
-                   && !board.IsNumberInBox(board, row, column, number);
+            return !board.GetRow(row).Contains(number)
+                   && !board.GetColumn(column).Contains(number)
+                   && !board.GetBox(row, column).Contains(number);
         }
     }
 }

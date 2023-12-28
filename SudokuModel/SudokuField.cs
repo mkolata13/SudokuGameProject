@@ -19,7 +19,7 @@ namespace SudokuModel
         {
             if (value < 0 || value > 9)
             {
-                throw new ArgumentException("Podana wartość musi być z przedziału 0-9");
+                throw new ArgumentException("Value should be between 0-9");
             }
 
             this._value = value;

@@ -10,8 +10,8 @@ namespace SudokuModel.UnitTests
         [TestMethod]
         public void TwoDifferentBoardTest()
         {
-            SudokuBoard board1 = new(new BacktrackingSudokuSolver());
-            SudokuBoard board2 = new(new BacktrackingSudokuSolver());
+            SudokuBoard board1 = new (new BacktrackingSudokuSolver());
+            SudokuBoard board2 = new (new BacktrackingSudokuSolver());
             board1.SolveGame();
             board2.SolveGame();
 
@@ -21,7 +21,7 @@ namespace SudokuModel.UnitTests
             {
                 for (int j = 0; j < 9; j++)
                 {
-                    if (board1.GetCell(i,j) != board2.GetCell(i, j))
+                    if (board1.GetFieldValue(i,j) != board2.GetFieldValue(i, j))
                     {
                         boardsAreDifferent = true;
                         break;
@@ -34,7 +34,7 @@ namespace SudokuModel.UnitTests
         [TestMethod]
         public void BoardValidationTest()
         {
-            SudokuBoard board = new(new BacktrackingSudokuSolver());
+            SudokuBoard board = new (new BacktrackingSudokuSolver());
             board.SolveGame();
 
             bool areRowsValid = true;

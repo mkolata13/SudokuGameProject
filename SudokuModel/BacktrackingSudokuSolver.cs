@@ -23,7 +23,7 @@ namespace SudokuModel
             {
                 for (int column = 0; column < SudokuBoard.BoardSize; column++)
                 {
-                    if (board.GetCell(row, column) == 0)
+                    if (board.GetFieldValue(row, column) == 0)
                     {
                         List<int> numbers = new List<int>();
                         for (int k = 1; k <= SudokuBoard.BoardSize; k++)
@@ -35,14 +35,14 @@ namespace SudokuModel
                         {
                             if (board.IsValidMove(board, row, column, number))
                             {
-                                board.SetCell(row, column, number);
+                                board.SetFieldValue(row, column, number);
                                 if (SolveBoard(board))
                                 {
                                     return true;
                                 }
                                 else
                                 {
-                                    board.SetCell(row, column, 0);
+                                    board.SetFieldValue(row, column, 0);
                                 }
                             }
                         }

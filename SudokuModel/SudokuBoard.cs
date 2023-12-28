@@ -22,12 +22,12 @@ namespace SudokuModel
             this._solver = solver ?? throw new ArgumentNullException(nameof(solver));
         }
 
-        public int GetCell(int row, int col)
+        public int GetFieldValue(int row, int col)
         {
             return _board[row, col].GetFieldValue();
         }
 
-        public void SetCell(int row, int col, int value)
+        public void SetFieldValue(int row, int col, int value)
         {
             _board[row, col].SetFieldValue(value);
         }

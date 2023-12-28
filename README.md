@@ -1,5 +1,6 @@
 # SudokuGameProject
-TECH:
+Tech:
 - Visual Studio 2022
 - .NET 8.0
-- MSTest for unit tests
+- xUnit 2.4.2
+- coverlet.collector 6.0.0

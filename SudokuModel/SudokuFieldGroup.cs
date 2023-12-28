@@ -8,7 +8,7 @@
         {
             this._fields = new SudokuField[fields.Length];
             Array.Copy(fields, this._fields, fields.Length);
-        }
+        }   
 
         public bool Verify()
         {

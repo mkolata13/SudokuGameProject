@@ -1,20 +1,19 @@
 ﻿namespace SudokuModel.UnitTests
 {
-    [TestClass]
     public class SudokuFieldTest
     {
-        [TestMethod]
+        [Fact]
         public void SetSudokuFieldInvalidValueTest()
         {
-            SudokuBoard board = new (new BacktrackingSudokuSolver());
+            SudokuBoard board = new(new BacktrackingSudokuSolver());
             board.SolveGame();
 
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.Throws<ArgumentException>(() =>
             {
                 board.SetFieldValue(1, 1, -5);
             });
 
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.Throws<ArgumentException>(() =>
             {
                 board.SetFieldValue(1, 1, 11);
             });
@@ -25,7 +24,7 @@
             }
             catch (ArgumentException exception)
             {
-                Assert.AreEqual("Value should be between 0-9", exception.Message);
+                Assert.Equal("Value should be between 0-9", exception.Message);
             }
         }
     }

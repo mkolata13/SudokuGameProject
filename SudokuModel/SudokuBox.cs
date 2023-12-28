@@ -1,6 +1,4 @@
 ﻿namespace SudokuModel
 {
-    public class SudokuBox(SudokuField[] fields) : SudokuCheck(fields)
-    {
-    }
+    public class SudokuBox(SudokuField[] fields) : SudokuCheck(fields);
 }

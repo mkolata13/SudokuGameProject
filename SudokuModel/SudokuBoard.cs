@@ -19,7 +19,7 @@ namespace SudokuModel
                 }
             }
 
-            this._solver = solver ?? throw new ArgumentNullException(nameof(solver));
+            this._solver = solver;
         }
 
         public int GetFieldValue(int row, int col)

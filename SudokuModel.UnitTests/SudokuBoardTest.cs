@@ -1,9 +1,8 @@
-namespace SudokuModel.UnitTests
+﻿namespace SudokuModel.UnitTests
 {
-    [TestClass]
     public class SudokuBoardTest
     {
-        [TestMethod]
+        [Fact]
         public void TwoDifferentBoardTest()
         {
             SudokuBoard board1 = new (new BacktrackingSudokuSolver());
@@ -17,7 +16,7 @@ namespace SudokuModel.UnitTests
             {
                 for (int j = 0; j < 9; j++)
                 {
-                    if (board1.GetFieldValue(i,j) != board2.GetFieldValue(i, j))
+                    if (board1.GetFieldValue(i, j) != board2.GetFieldValue(i, j))
                     {
                         boardsAreDifferent = true;
                         break;
@@ -25,9 +24,9 @@ namespace SudokuModel.UnitTests
                 }
             }
 
-            Assert.IsTrue(boardsAreDifferent);
+            Assert.True(boardsAreDifferent);
         }
-        [TestMethod]
+        [Fact]
         public void BoardValidationTest()
         {
             SudokuBoard board = new (new BacktrackingSudokuSolver());
@@ -69,7 +68,7 @@ namespace SudokuModel.UnitTests
                 }
             }
 
-            Assert.IsTrue(areRowsValid && areColumnsValid && areBoxesValid);
+            Assert.True(areRowsValid && areColumnsValid && areBoxesValid);
         }
     }
 }

@@ -4,10 +4,6 @@
     {
         private int _value;
 
-        public SudokuField()
-        {
-        }
-
         public int GetFieldValue()
         {
             return _value;

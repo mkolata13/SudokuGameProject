@@ -1,9 +1,8 @@
-﻿namespace SudokuModel.UnitTests 
+﻿namespace SudokuModel.UnitTests
 {
-    [TestClass]
     public class SudokuCheckTest
     {
-        [TestMethod]
+        [Fact]
         public void VerifyWithInvalidBoardTest()
         {
             SudokuBoard board = new (new BacktrackingSudokuSolver());
@@ -13,19 +12,19 @@
             board.SetFieldValue(0, 1, 1);
             board.SetFieldValue(1, 0, 1);
 
-            Assert.IsFalse(board.GetRow(0).Verify());
-            Assert.IsFalse(board.GetColumn(0).Verify());
-            Assert.IsFalse(board.GetBox(0, 0).Verify());
+            Assert.False(board.GetRow(0).Verify());
+            Assert.False(board.GetColumn(0).Verify());
+            Assert.False(board.GetBox(0, 0).Verify());
         }
 
-        [TestMethod]
+        [Fact]
         public void VerifyWithValueEqualZero()
         {
             SudokuBoard board = new (new BacktrackingSudokuSolver());
             board.SolveGame();
 
             board.SetFieldValue(0, 0, 0);
-            Assert.IsTrue(board.GetBox(0, 0).Verify());
+            Assert.True(board.GetBox(0, 0).Verify());
         }
     }
 }

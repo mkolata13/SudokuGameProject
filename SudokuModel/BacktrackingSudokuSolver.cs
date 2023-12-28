@@ -2,10 +2,6 @@
 {
     public class BacktrackingSudokuSolver : ISudokuSolver
     {
-        public BacktrackingSudokuSolver()
-        {
-        }
-
         public void Solve(SudokuBoard board)
         {
             SolveBoard(board);

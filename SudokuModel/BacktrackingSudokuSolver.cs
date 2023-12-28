@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SudokuModel
 {
-    public class BacktrackingSudokuSolver : SudokuSolver
+    public class BacktrackingSudokuSolver : ISudokuSolver
     {
         public BacktrackingSudokuSolver()
         {
@@ -23,7 +23,7 @@ namespace SudokuModel
             {
                 for (int column = 0; column < SudokuBoard.BoardSize; column++)
                 {
-                    if (board.getCell(row, column) == 0)
+                    if (board.GetCell(row, column) == 0)
                     {
                         List<int> numbers = new List<int>();
                         for (int k = 1; k <= SudokuBoard.BoardSize; k++)
@@ -33,16 +33,16 @@ namespace SudokuModel
                         Shuffle(numbers);
                         foreach (int number in numbers)
                         {
-                            if (board.isValidMove(board, row, column, number))
+                            if (board.IsValidMove(board, row, column, number))
                             {
-                                board.setCell(row, column, number);
+                                board.SetCell(row, column, number);
                                 if (SolveBoard(board))
                                 {
                                     return true;
                                 }
                                 else
                                 {
-                                    board.setCell(row, column, 0);
+                                    board.SetCell(row, column, 0);
                                 }
                             }
                         }
@@ -60,9 +60,7 @@ namespace SudokuModel
             for (int i = n - 1; i > 0; i--)
             {
                 int j = random.Next(0, i + 1);
-                T temp = list[i];
-                list[i] = list[j];
-                list[j] = temp;
+                (list[j], list[i]) = (list[i], list[j]);
             }
         }
     }

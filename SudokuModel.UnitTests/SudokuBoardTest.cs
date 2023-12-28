@@ -12,8 +12,8 @@ namespace SudokuModel.UnitTests
         {
             SudokuBoard board1 = new();
             SudokuBoard board2 = new();
-            board1.solveGame();
-            board2.solveGame();
+            board1.SolveGame();
+            board2.SolveGame();
 
             bool boardsAreDifferent = false;
 
@@ -21,7 +21,7 @@ namespace SudokuModel.UnitTests
             {
                 for (int j = 0; j < 9; j++)
                 {
-                    if (board1.getCell(i, j) != board2.getCell(i, j))
+                    if (board1.GetCell(i, j) != board2.GetCell(i, j))
                     {
                         boardsAreDifferent = true;
                         break;
@@ -35,7 +35,7 @@ namespace SudokuModel.UnitTests
         public void BoardValidationTest()
         {
             SudokuBoard board = new();
-            board.solveGame();
+            board.SolveGame();
 
             bool areRowsValid = true;
             bool areColumnsValid = true;
@@ -47,19 +47,19 @@ namespace SudokuModel.UnitTests
 
                 for (int j = 0; j < 9; j++)
                 {
-                    if (rowSet.Contains(board.getCell(i, j)))
+                    if (rowSet.Contains(board.GetCell(i, j)))
                     {
                         areRowsValid = false;
                         break;
                     }
-                    rowSet.Add(board.getCell(i, j));
+                    rowSet.Add(board.GetCell(i, j));
 
-                    if (colSet.Contains(board.getCell(j, i)))
+                    if (colSet.Contains(board.GetCell(j, i)))
                     {
                         areColumnsValid = false;
                         break;
                     }
-                    colSet.Add(board.getCell(j, i));
+                    colSet.Add(board.GetCell(j, i));
                 }
             }
 
@@ -72,12 +72,12 @@ namespace SudokuModel.UnitTests
                 {
                     for (int col = 0; col < 3; col++)
                     {
-                        if (boxSet.Contains(board.getCell(row + i, col)))
+                        if (boxSet.Contains(board.GetCell(row + i, col)))
                         {
                             areBoxesValid = false;
                             break;
                         }
-                        boxSet.Add(board.getCell(row + i, col));
+                        boxSet.Add(board.GetCell(row + i, col));
                     }
                 }
             }

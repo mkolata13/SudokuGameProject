@@ -1,10 +1,12 @@
-﻿namespace SudokuModel
+﻿Console.WriteLine("Working");
+
+namespace SudokuModel
 {
     public class SudokuBoard
     {
         private int[][] _board;
         public const int BoardSize = 9;
-        private SudokuSolver solver;
+        private ISudokuSolver _solver;
 
         public SudokuBoard()
         {
@@ -13,29 +15,29 @@
             {
                 _board[i] = new int[BoardSize];
             }
-            this.solver ??= new BacktrackingSudokuSolver();
+            this._solver ??= new BacktrackingSudokuSolver();
         }
 
-        public int getCell(int row, int col)
+        public int GetCell(int row, int col)
         {
             return _board[row][col];
         }
 
-        public void setCell(int row, int col, int value)
+        public void SetCell(int row, int col, int value)
         {
             _board[row][col] = value;
         }
 
-        public void solveGame()
+        public void SolveGame()
         {
-            solver.Solve(this);
+            _solver.Solve(this);
         }
 
-        private bool isNumberInRow(SudokuBoard board, int row, int number)
+        private bool IsNumberInRow(SudokuBoard board, int row, int number)
         {
             for (int column = 0; column < BoardSize; column++)
             {
-                if (board.getCell(row, column) == number)
+                if (board.GetCell(row, column) == number)
                 {
                     return true;
                 }
@@ -43,11 +45,11 @@
             return false;
         }
 
-        private bool isNumberInColumn(SudokuBoard board, int column, int number)
+        private bool IsNumberInColumn(SudokuBoard board, int column, int number)
         {
             for (int row = 0; row < BoardSize; row++)
             {
-                if (board.getCell(row, column) == number)
+                if (board.GetCell(row, column) == number)
                 {
                     return true;
                 }
@@ -55,7 +57,7 @@
             return false;
         }
 
-        private bool isNumberInBox(SudokuBoard board, int row, int column, int number)
+        private bool IsNumberInBox(SudokuBoard board, int row, int column, int number)
         {
             int rowBoxStart = row - row % 3;
             int columnBoxStart = column - column % 3;
@@ -63,7 +65,7 @@
             {
                 for (int j = columnBoxStart; j < columnBoxStart + 3; j++)
                 {
-                    if (board.getCell(i, j) == number)
+                    if (board.GetCell(i, j) == number)
                     {
                         return true;
                     }
@@ -72,18 +74,11 @@
             return false;
         }
 
-        public bool isValidMove(SudokuBoard board, int row, int column, int number)
+        public bool IsValidMove(SudokuBoard board, int row, int column, int number)
         {
-            return !board.isNumberInRow(board, row, number)
-                   && !board.isNumberInColumn(board, column, number)
-                   && !board.isNumberInBox(board, row, column, number);
-        }
-    }
-    class Program
-    {
-        private static void Main(string[] args)
-        {
-            Console.WriteLine("abc");
+            return !board.IsNumberInRow(board, row, number)
+                   && !board.IsNumberInColumn(board, column, number)
+                   && !board.IsNumberInBox(board, row, column, number);
         }
     }
 }

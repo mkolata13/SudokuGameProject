@@ -23,7 +23,7 @@
                         Shuffle(numbers);
                         foreach (int number in numbers)
                         {
-                            if (board.IsValidMove(board, row, column, number))
+                            if (board.IsValidMove(row, column, number))
                             {
                                 board.SetFieldValue(row, column, number);
                                 if (SolveBoard(board))

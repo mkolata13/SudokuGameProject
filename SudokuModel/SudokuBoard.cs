@@ -1,6 +1,4 @@
-﻿Console.WriteLine("Working");
-
-namespace SudokuModel
+﻿namespace SudokuModel
 {
     public class SudokuBoard
     {
@@ -35,6 +33,18 @@ namespace SudokuModel
         public void SolveGame()
         {
             _solver.Solve(this);
+        }
+
+        public void PrintBoard()
+        {
+            for (int i = 0; i < BoardSize; i++)
+            {
+                for (int j = 0; j < BoardSize; j++)
+                {
+                    Console.Write(" " + this.GetFieldValue(i, j));
+                }
+                Console.WriteLine();
+            }
         }
 
         public SudokuRow GetRow(int y)
@@ -76,12 +86,11 @@ namespace SudokuModel
             return new SudokuBox(box);
         }
 
-
-        public bool IsValidMove(SudokuBoard board, int row, int column, int number)
+        public bool IsValidMove(int row, int column, int number)
         {
-            return !board.GetRow(row).Contains(number)
-                   && !board.GetColumn(column).Contains(number)
-                   && !board.GetBox(row, column).Contains(number);
+            return !this.GetRow(row).Contains(number)
+                   && !this.GetColumn(column).Contains(number)
+                   && !this.GetBox(row, column).Contains(number);
         }
     }
 }
